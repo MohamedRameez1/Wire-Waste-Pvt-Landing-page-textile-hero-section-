@@ -1,0 +1,180 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Plus Jakarta Sans',sans-serif; background:#F4F6FB; color:#1a2540; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:#F4F6FB; }
+::-webkit-scrollbar-thumb { background:#B3BACC; border-radius:3px; }
+@keyframes floatUp { 0%,100%{transform:translateY(0) rotate(0deg);opacity:.3} 50%{transform:translateY(-26px) rotate(180deg);opacity:.6} }
+@keyframes morphBlob { 0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%} 50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%} }
+@keyframes pulseRing { 0%{transform:translate(-50%,-50%) scale(1);opacity:.5} 100%{transform:translate(-50%,-50%) scale(1.65);opacity:0} }
+.ww-blob  { animation:morphBlob 13s ease-in-out infinite; }
+.ww-blob2 { animation:morphBlob 17s ease-in-out infinite reverse; }
+.ww-glass {
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.55);
+}
+.ww-glass-nav {
+  background:rgba(244,246,251,0.82);
+  backdrop-filter:blur(28px) saturate(1.9);
+  -webkit-backdrop-filter:blur(28px) saturate(1.9);
+  border-bottom:1px solid rgba(179,186,204,0.30);
+  box-shadow:0 2px 36px rgba(35,55,109,0.07);
+}
+.ww-nav-link {
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:13.5px; font-weight:500;
+  color:#5a6580; text-decoration:none;
+  letter-spacing:.01em; transition:color .2s;
+  position:relative; padding-bottom:2px;
+}
+.ww-nav-link::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:0;
+  height:1.5px; background:#9AB52A; border-radius:2px;
+  transform:scaleX(0); transition:transform .25s ease;
+}
+.ww-nav-link:hover { color:#23376D; }
+.ww-nav-link:hover::after { transform:scaleX(1); }
+@media(max-width:900px){
+  .ww-desk{display:none!important}
+  .ww-mob-btn{display:flex!important}
+  .ww-two-col{grid-template-columns:1fr!important}
+  .ww-four-col{grid-template-columns:1fr 1fr!important}
+  .ww-chaos-img{order:0!important;margin-bottom:32px;}
+}
+.ww-trace-line {
+  top: 24px;
+  left: 50%;
+  width: 100%;
+  height: 1.5px;
+}
+@media(max-width:768px){
+  .ww-trace-flow {
+    flex-direction: column !important;
+    gap: 32px !important;
+    align-items: flex-start !important;
+  }
+  .ww-trace-step-wrapper {
+    flex-direction: row !important;
+    gap: 16px;
+    align-items: center !important;
+    width: 100%;
+  }
+  .ww-trace-line {
+    top: 24px;
+    left: 24px;
+    width: 1.5px;
+    height: calc(100% + 32px);
+  }
+  .ww-trace-label {
+    margin-top: 0 !important;
+    font-size: 12px !important;
+    text-align: left !important;
+  }
+  .ww-flow-steps {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .ww-flow-step-item {
+    flex-direction: column !important;
+  }
+  .ww-flow-line {
+    width: 2px !important;
+    height: 16px !important;
+    margin: 8px 0 !important;
+  }
+  .ww-stakeholder-diagram {
+    transform: scale(0.75);
+    margin: -40px 0;
+  }
+  .ww-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+@media(max-width:520px){
+  .ww-four-col{grid-template-columns:1fr!important}
+}
+.ww-hero {
+  position: relative;
+  background: linear-gradient(168deg, #1a2d5e 0%, #243b6e 40%, #2d4a7a 70%, #1e3260 100%);
+}
+@media(max-width: 900px) {
+  .ww-hero > div {
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+  }
+}
+@media(max-width: 600px) {
+  .ww-hero > div {
+    padding-top: 90px !important;
+    padding-bottom: 40px !important;
+  }
+}
+.ww-gallery-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 36px rgba(35,55,109,0.16) !important;
+}
+.ww-gallery-card:hover img {
+  transform: scale(1.08);
+}
+@keyframes particleDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.25; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 0.55; }
+}
+/* Animated Border Card Effect */
+@keyframes borderRotate {
+  100% { transform: rotate(360deg); }
+}
+.ww-animated-border-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.ww-animated-border-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent 70%, rgba(35,55,109,0.15) 80%, rgba(35,55,109,0.8) 100%);
+  animation: borderRotate 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -2;
+}
+.ww-animated-border-card:hover::before,
+.ww-animated-border-card.active::before {
+  opacity: 1;
+}
+.ww-animated-border-card::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: #ffffff;
+  border-radius: inherit;
+  z-index: -1;
+  transition: background 0.4s ease;
+}
+.ww-animated-border-card:hover::after,
+.ww-animated-border-card.active::after {
+  background: #f8f9fc;
+}
+.ww-animated-border-card:hover h3 {
+  color: #1a2540 !important;
+}
+.ww-animated-border-card:hover p {
+  color: #3a4560 !important;
+}
