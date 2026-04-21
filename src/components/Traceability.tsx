@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { T, Icon, SectionHeader } from './shared';
+
 const TRACE_STEPS = [
 {
   label: 'Brand',
@@ -74,12 +75,11 @@ const STAGES = [
 function TraceStep({
   step,
   index
+}: { step: (typeof TRACE_STEPS)[0]; index: number }) {
 
-
-
-}: {step: (typeof TRACE_STEPS)[0];index: number;}) {
   const isLast = index === TRACE_STEPS.length - 1;
   const [active, setActive] = useState(false);
+
   return (
     <div
       className="ww-trace-step-wrapper"
@@ -89,8 +89,8 @@ function TraceStep({
         alignItems: 'center',
         flex: 1,
         position: 'relative'
-      }}>
-      
+      }}
+    >
       {!isLast &&
       <div
         className="ww-trace-line"
@@ -100,8 +100,8 @@ function TraceStep({
           opacity: 0.35,
           zIndex: 0
         }} />
-
       }
+
       <motion.div
         className="ww-trace-icon"
         onMouseEnter={() => setActive(true)}
@@ -122,14 +122,13 @@ function TraceStep({
           '0 2px 12px rgba(0,0,0,0.08)',
           transition: 'all .25s'
         }}>
-        
         <Icon
           name={step.iconName}
           size={18}
           color={active ? '#fff' : step.color}
           strokeWidth={1.8} />
-        
       </motion.div>
+
       <span
         className="ww-trace-label"
         style={{
@@ -140,22 +139,29 @@ function TraceStep({
           textAlign: 'center',
           fontFamily: "'JetBrains Mono',monospace",
           letterSpacing: '.04em',
-          textTransform: 'uppercase',
-          transition: 'color .2s'
+          textTransform: 'uppercase'
         }}>
-        
         {step.label}
       </span>
-    </div>);
-
+    </div>
+  );
 }
+
 export function Traceability() {
-  const [activeStage, setActive] = useState<number | null>(null);
+
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
   const ref = useRef(null);
-  const inView = useInView(ref, {
-    once: true,
-    margin: '-60px'
-  });
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <section
       id="traceability"
@@ -166,34 +172,19 @@ export function Traceability() {
         overflow: 'hidden'
       }}>
       
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto'
-        }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         
         <SectionHeader
           badge="Supply Chain"
           title="End-to-End Traceability"
-          subtitle="The platform tracks material movement at every stage of the circular supply chain." />
-        
+          subtitle="The platform tracks material movement at every stage of the circular supply chain."
+        />
+
+        {/* TRACE STEPS (UNCHANGED) */}
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 20
-          }}
-          animate={
-          inView ?
-          {
-            opacity: 1,
-            y: 0
-          } :
-          {}
-          }
-          transition={{
-            duration: 0.8,
-            delay: 0.2
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
           style={{
             background: T.offWhite,
             borderRadius: 20,
@@ -210,100 +201,92 @@ export function Traceability() {
               gap: 0,
               width: '100%'
             }}>
-            
             {TRACE_STEPS.map((step, i) =>
-            <TraceStep key={i} step={step} index={i} />
+              <TraceStep key={i} step={step} index={i} />
             )}
           </div>
         </motion.div>
+
+        {/* STAGES (SMOOTH GLOW) */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))',
-            gap: 16
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)',
+            gap: 24
           }}>
           
-          {STAGES.map((s, i) =>
-          <motion.div
-            key={i}
-            initial={{
-              opacity: 0,
-              y: 16
-            }}
-            animate={
-            inView ?
-            {
-              opacity: 1,
-              y: 0
-            } :
-            {}
-            }
-            transition={{
-              duration: 0.5,
-              delay: 0.3 + i * 0.07
-            }}
-            onMouseEnter={() => setActive(i)}
-            onMouseLeave={() => setActive(null)}
-            onClick={() => setActive(activeStage === i ? null : i)}
-            whileHover={{
-              y: -6,
-              scale: 1.03
-            }}
-            whileTap={{
-              scale: 0.97
-            }}
-            style={{
-              background: activeStage === i ? T.navy : T.white,
-              border: `1px solid ${activeStage === i ? T.navy : T.blueGreyLt}`,
-              borderRadius: 14,
-              padding: '20px 18px',
-              cursor: 'pointer',
-              transition: 'all .3s',
-              boxShadow:
-              activeStage === i ?
-              `0 12px 32px rgba(35,55,109,0.24)` :
-              '0 1px 4px rgba(0,0,0,0.04)'
-            }}>
-            
-              <div
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '.08em',
-                color: activeStage === i ? T.lime : T.accent,
-                marginBottom: 8,
-                fontFamily: "'JetBrains Mono',monospace"
-              }}>
-              
-                Stage {i + 1}
-              </div>
-              <div
-              style={{
-                fontSize: 14,
-                fontWeight: 600,
-                marginBottom: 8,
-                lineHeight: 1.3,
-                color: activeStage === i ? '#fff' : T.textPrimary
-              }}>
-              
-                {s.name}
-              </div>
-              <p
-              style={{
-                fontSize: 13,
-                lineHeight: 1.55,
-                margin: 0,
-                color:
-                activeStage === i ? 'rgba(255,255,255,0.7)' : T.textMuted
-              }}>
-              
-                {s.desc}
-              </p>
-            </motion.div>
-          )}
-        </div>
-      </div>
-    </section>);
+          {STAGES.map((s, i) => {
+            const active = hovered === i;
 
+            return (
+              <div
+                key={i}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  position: 'relative',
+                  borderRadius: 18,
+                  overflow: 'hidden',
+                  padding: 2
+                }}
+              >
+
+                {/* SINGLE SMOOTH GLOW */}
+                {active && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: -60,
+                      borderRadius: '50%',
+                      background:
+                        'conic-gradient(from 0deg, #23376D, #3a5599, #6BA89A, #23376D)',
+                      animation: 'spinSmooth 6s linear infinite',
+                      filter: 'blur(40px)',
+                      opacity: 0.5
+                    }}
+                  />
+                )}
+
+                {/* CARD */}
+                <div
+                  style={{
+                    position: 'relative',
+                    borderRadius: 16,
+                    background: '#ffffff',
+                    padding: '20px',
+                    zIndex: 1,
+                    border: `1px solid ${T.blueGreyLt}`,
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.05)'
+                  }}
+                >
+                  <div style={{ fontSize: 10, fontWeight: 700, marginBottom: 6 }}>
+                    Stage {i + 1}
+                  </div>
+
+                  <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>
+                    {s.name}
+                  </div>
+
+                  <p style={{ fontSize: 13, margin: 0, color: T.textMuted }}>
+                    {s.desc}
+                  </p>
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+
+      {/* ANIMATION */}
+      <style>{`
+        @keyframes spinSmooth {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
+
+    </section>
+  );
 }

@@ -3,8 +3,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { forwardRef, useRef, useMemo, useLayoutEffect } from 'react';
 import { Color } from 'three';
 
-// ✅ Convert HEX to RGB
-const hexToNormalizedRGB = (hex: string) => {
+// ✅ FIXED (removed TS type)
+const hexToNormalizedRGB = (hex) => {
   hex = hex.replace('#', '');
   return [
     parseInt(hex.slice(0, 2), 16) / 255,
@@ -51,18 +51,18 @@ vec2 rotateUvs(vec2 uv, float angle) {
 }
 
 void main() {
-  float rnd        = noise(gl_FragCoord.xy);
-  vec2  uv         = rotateUvs(vUv * uScale, uRotation);
-  vec2  tex        = uv * uScale;
-  float tOffset    = uSpeed * uTime;
+  float rnd = noise(gl_FragCoord.xy);
+  vec2 uv = rotateUvs(vUv * uScale, uRotation);
+  vec2 tex = uv * uScale;
+  float tOffset = uSpeed * uTime;
 
   tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
 
   float pattern = 0.6 +
-                  0.4 * sin(5.0 * (tex.x + tex.y +
-                                   cos(3.0 * tex.x + 5.0 * tex.y) +
-                                   0.02 * tOffset) +
-                           sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+    0.4 * sin(5.0 * (tex.x + tex.y +
+    cos(3.0 * tex.x + 5.0 * tex.y) +
+    0.02 * tOffset) +
+    sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
 
   vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
   col.a = 1.0;
@@ -70,14 +70,14 @@ void main() {
 }
 `;
 
-const SilkPlane = forwardRef<any, any>(function SilkPlane({ uniforms }, ref) {
+const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
   const { viewport } = useThree();
 
   useLayoutEffect(() => {
     if (ref.current) {
-      ref.current.scale.set(viewport.width, viewport.height, 1);
+      ref.current.scale.set(viewport.width * 1.2, viewport.height * 1.2, 1);
     }
-  }, [ref, viewport]);
+  }, [viewport]);
 
   useFrame((_, delta) => {
     if (ref.current) {
@@ -87,7 +87,7 @@ const SilkPlane = forwardRef<any, any>(function SilkPlane({ uniforms }, ref) {
 
   return (
     <mesh ref={ref}>
-      <planeGeometry args={[1, 1, 1, 1]} />
+      <planeGeometry args={[1, 1]} />
       <shaderMaterial
         uniforms={uniforms}
         vertexShader={vertexShader}
@@ -104,25 +104,28 @@ const Silk = ({
   noiseIntensity = 1.5,
   rotation = 0
 }) => {
-  const meshRef = useRef<any>();
+  const meshRef = useRef(null); // ✅ FIXED
 
-  const uniforms = useMemo(
-    () => ({
-      uSpeed: { value: speed },
-      uScale: { value: scale },
-      uNoiseIntensity: { value: noiseIntensity },
-      uColor: { value: new Color(...hexToNormalizedRGB(color)) },
-      uRotation: { value: rotation },
-      uTime: { value: 0 }
-    }),
-    [speed, scale, noiseIntensity, color, rotation]
-  );
+  const uniforms = useMemo(() => ({
+    uSpeed: { value: speed },
+    uScale: { value: scale },
+    uNoiseIntensity: { value: noiseIntensity },
+    uColor: { value: new Color(...hexToNormalizedRGB(color)) },
+    uRotation: { value: rotation },
+    uTime: { value: 0 }
+  }), [speed, scale, noiseIntensity, color, rotation]);
 
   return (
     <Canvas
-      dpr={[1, 2]}
+      dpr={[1, 1.5]} // ✅ reduced load (important)
       frameloop="always"
-      style={{ width: '100%', height: '100%' }} // ✅ important
+      gl={{ antialias: true }}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%'
+      }}
     >
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>

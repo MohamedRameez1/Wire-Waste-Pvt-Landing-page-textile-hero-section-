@@ -106,9 +106,13 @@ body { font-family:'Plus Jakarta Sans',sans-serif; background:#F4F6FB; color:#1a
 @media(max-width:520px){
   .ww-four-col{grid-template-columns:1fr!important}
 }
-.ww-hero {
+/* .ww-hero {
   position: relative;
   background: linear-gradient(168deg, #1a2d5e 0%, #243b6e 40%, #2d4a7a 70%, #1e3260 100%);
+} */
+ .ww-hero {
+  position: relative;
+  background: transparent;
 }
 @media(max-width: 900px) {
   .ww-hero > div {

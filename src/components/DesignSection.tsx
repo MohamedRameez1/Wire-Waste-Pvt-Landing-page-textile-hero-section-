@@ -150,7 +150,36 @@ export function DesignSection() {
             }
             </div>
           )}
-        </motion.div>
+        </motion.div>{/* 🎥 VIDEO SECTION (EDGE-TO-EDGE CLEAN) */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={inView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.8, delay: 0.3 }}
+  style={{
+    width: '100vw',                 // full viewport width
+    marginLeft: 'calc(-50vw + 50%)', // break out of container
+    marginRight: 'calc(-50vw + 50%)',
+    marginBottom: 60,
+    overflow: 'hidden',
+    position: 'relative'
+  }}
+>
+  <video
+    src="/videos/design.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    preload="auto"
+    style={{
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      display: 'block'
+    }}
+  />
+</motion.div>
+        
         <div
           style={{
             display: 'grid',

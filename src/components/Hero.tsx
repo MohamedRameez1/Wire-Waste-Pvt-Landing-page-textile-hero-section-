@@ -7,27 +7,35 @@ import ShinyText from './ShinyText';
 export function Hero() {
   return (
     <section
-      className="ww-hero"
-      style={{
-        minHeight: '100vh',
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden'
-      }}
-    >
+  className="ww-hero"
+  style={{
+    minHeight: '100vh', // 👈 revert this
+    height: '100svh',   // 👈 mobile-safe viewport
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden'
+  }}
+>
 
       {/* Silk Background */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <Silk
-          speed={5}
-          scale={1}
-          color="#5227ff"
-          noiseIntensity={1.5}
-          rotation={0}
-        />
-      </div>
+<div style={{
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: 0
+}}>
+  <Silk
+    speed={5}
+    scale={1}
+    color="#5227ff"
+    noiseIntensity={1.5}
+    rotation={0}
+  />
+</div>
 
       {/* Overlay */}
       <div
