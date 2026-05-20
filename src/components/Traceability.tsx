@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react'; 
 import { motion, useInView } from 'framer-motion';
 import { T, Icon, SectionHeader } from './shared';
-
 const TRACE_STEPS = [
 {
   label: 'Brand',

@@ -1,21 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { T, SectionHeader } from './shared';
 
 const CARD_WIDTH = 340;
 const CARD_GAP = 24;
 
+// ✅ TYPE
+type GalleryImage = {
+  src: string;
+  alt: string;
+};
+
 export function Gallery() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
+
   const inView = useInView(ref, {
     once: true,
     margin: '-60px'
   });
 
-  const trackRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
-  // ✅ NEW STATE
-  const [galleryImages, setGalleryImages] = useState<any[]>([]);
+  // ✅ FIXED TYPE
+  const trackRef = useRef<HTMLDivElement | null>(null);
+
+  const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
 
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -23,9 +33,9 @@ export function Gallery() {
   const [scrollLeft, setScrollLeft] = useState(0);
 
   const animRef = useRef<number>(0);
-  const posRef = useRef(0);
+  const posRef = useRef<number>(0);
 
-  // ✅ FETCH DATA (ONLY ADDITION)
+  // ✅ FETCH DATA
   useEffect(() => {
     fetch('/data.json')
       .then(res => res.json())
@@ -34,7 +44,6 @@ export function Gallery() {
       });
   }, []);
 
-  // ✅ SAME LOGIC
   const images = [...galleryImages, ...galleryImages];
   const totalWidth = galleryImages.length * (CARD_WIDTH + CARD_GAP);
 
@@ -85,6 +94,12 @@ export function Gallery() {
     setIsDragging(false);
   };
 
+  const handleImageClick = () => {
+    if (!isDragging) {
+      navigate('/gallery');
+    }
+  };
+
   return (
     <section
       id="gallery"
@@ -126,34 +141,29 @@ export function Gallery() {
         onTouchEnd={handleDragEnd}
       >
 
-        {/* SAME UI */}
-        <div
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: 80,
-            background:
-              'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
-            zIndex: 2,
-            pointerEvents: 'none'
-          }}
-        />
+        <div style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 80,
+          background:
+            'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
+          zIndex: 2,
+          pointerEvents: 'none'
+        }} />
 
-        <div
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: 80,
-            background:
-              'linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
-            zIndex: 2,
-            pointerEvents: 'none'
-          }}
-        />
+        <div style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: 80,
+          background:
+            'linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
+          zIndex: 2,
+          pointerEvents: 'none'
+        }} />
 
         <div
           ref={trackRef}
@@ -165,22 +175,33 @@ export function Gallery() {
           }}
         >
           {images.map((img, i) => (
-            <div key={i} className="ww-gallery-card" style={{
-              flexShrink: 0,
-              width: CARD_WIDTH,
-              height: 240,
-              borderRadius: 16,
-              overflow: 'hidden',
-              position: 'relative',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-              border: `1px solid ${T.blueGreyLt}`,
-              transition: 'transform .35s ease, box-shadow .35s ease'
-            }}>
-              <img src={img.src} alt={img.alt} draggable={false} style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }} />
+            <div
+              key={i}
+              onClick={handleImageClick}
+              className="ww-gallery-card"
+              style={{
+                flexShrink: 0,
+                width: CARD_WIDTH,
+                height: 240,
+                borderRadius: 16,
+                overflow: 'hidden',
+                position: 'relative',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                border: `1px solid ${T.blueGreyLt}`,
+                transition: 'transform .35s ease, box-shadow .35s ease',
+                cursor: 'pointer'
+              }}>
+              
+              <img
+                src={img.src}
+                alt={img.alt}
+                draggable={false}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
             </div>
           ))}
         </div>

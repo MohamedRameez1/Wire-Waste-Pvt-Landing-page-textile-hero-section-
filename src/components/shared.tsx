@@ -48,27 +48,31 @@ export const Icon = ({
     strokeLinejoin: 'round' as const
   };
   const icons: Record<string, React.ReactNode> = {
-    brand:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <rect x="3" y="3" width="7" height="7" rx="1.5" />
-        <rect x="14" y="3" width="7" height="7" rx="1.5" />
-        <rect x="3" y="14" width="7" height="7" rx="1.5" />
-        <path d="M17.5 14v7M14 17.5h7" />
-      </svg>,
-
+ brand:
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <circle cx="12" cy="8" r="4" />
+  <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" />
+</svg>,
     factory:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <path d="M3 21V10l5-3v3l5-3v3l5-3v11H3z" />
-        <path d="M7 21v-4h3v4M14 21v-4h3v4" />
-        <line x1="3" y1="14" x2="21" y2="14" />
-      </svg>,
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <path d="M3 21h18" />
+  <rect x="4" y="9" width="6" height="12" />
+  <rect x="10" y="12" width="5" height="9" />
+  <rect x="15" y="6" width="5" height="15" />
+  <path d="M6 12h1M6 15h1M6 18h1" />
+  <path d="M12 15h1M12 18h1" />
+  <path d="M17 9h1M17 12h1M17 15h1M17 18h1" />
+</svg>,
 
     recycle:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <path d="M7 19H4.5A2.5 2.5 0 0 1 2 16.5c0-.93.5-1.75 1.26-2.18L12 9l8.74 5.32A2.5 2.5 0 0 1 19.5 19H17" />
-        <path d="M12 9V3M9 6l3-3 3 3" />
-        <path d="M7 19l-3 3M17 19l3 3" />
-      </svg>,
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <path d="M1 6h13v10H1z" />
+  <path d="M14 9h4l3 3v4h-7z" />
+  <circle cx="5" cy="18" r="2" />
+  <circle cx="18" cy="18" r="2" />
+  <path d="M4 10h7" />
+  <path d="M4 13h5" />
+</svg>,
 
     truck:
     <svg style={s} viewBox="0 0 24 24" {...p}>
@@ -79,22 +83,26 @@ export const Icon = ({
       </svg>,
 
     cog:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
-      </svg>,
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <path d="M9 3h6" />
+  <path d="M10 3v5l-5 9a3 3 0 0 0 2.6 4.5h8.8A3 3 0 0 0 19 17l-5-9V3" />
+  <path d="M8 14h8" />
+  <path d="M9.5 11h5" />
+</svg>,
 
-    yarn:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3.6 9h16.8M3.6 15h16.8M12 3a9 9 0 0 0 0 18M12 3a9 9 0 0 1 0 18" />
-      </svg>,
-
+ yarn:
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <path d="M9 3h6l3 18H6L9 3z" />
+  <path d="M10 7h4" />
+  <path d="M9 11h6" />
+  <path d="M8 15h8" />
+  <path d="M7 19h10" />
+</svg>,
     check:
     <svg style={s} viewBox="0 0 24 24" {...p}>
-        <path d="M20 6L9 17l-5-5" />
-        <circle cx="12" cy="12" r="10" />
-      </svg>,
+  <circle cx="12" cy="8" r="4" />
+  <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" />
+</svg>,
 
     collab:
     <svg style={s} viewBox="0 0 24 24" {...p}>
@@ -104,11 +112,9 @@ export const Icon = ({
       </svg>,
 
     atom:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <circle cx="12" cy="12" r="2" />
-        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2" />
-        <path d="M2 12c0-2.8 4.5-5 10-5s10 2.2 10 5-4.5 5-10 5S2 14.8 2 12" />
-      </svg>,
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <path d="M8 4l4 2 4-2 3 4-3 2v10H8V10L5 8l3-4z" />
+</svg>,
 
     shield:
     <svg style={s} viewBox="0 0 24 24" {...p}>
@@ -125,12 +131,11 @@ export const Icon = ({
       </svg>,
 
     thread:
-    <svg style={s} viewBox="0 0 24 24" {...p}>
-        <path d="M5 12c0-3.87 3.13-7 7-7" />
-        <path d="M19 12c0 3.87-3.13 7-7 7" />
-        <path d="M12 5l2-2-2-2M12 19l-2 2 2 2M8 8c-1 1.5-1 5 0 8M16 8c1 1.5 1 5 0 8" />
-      </svg>,
-
+<svg style={s} viewBox="0 0 24 24" {...p}>
+  <rect x="3" y="11" width="18" height="10" rx="2" />
+  <path d="M7 11V8a5 5 0 0 1 10 0v3" />
+  <circle cx="12" cy="16" r="1" />
+</svg>,
     loop:
     <svg style={s} viewBox="0 0 24 24" {...p}>
         <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />

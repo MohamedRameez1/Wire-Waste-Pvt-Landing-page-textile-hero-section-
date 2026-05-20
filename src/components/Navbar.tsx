@@ -12,31 +12,31 @@ export function Navbar() {
   const links = [
   {
     label: 'About Us',
-    href: '#about-us'
+    href: '/#about'
   },
   {
     label: 'Traceability',
-    href: '#traceability'
+    href: '/#traceability'
   },
   {
     label: 'Design',
-    href: '#design'
+    href: '/#design'
   },
   {
     label: 'Metrics',
-    href: '#metrics'
+    href: '/metrics'
   },
   {
     label: 'Stakeholders',
-    href: '#stakeholders'
+    href: '/#stakeholders'
   },
   {
     label: 'Gallery',
-    href: '#gallery'
+    href: '/#gallery'
   },
   {
     label: 'Blog',
-    href: '#blog'
+    href: '/#blog'
   }];
 
   return (
@@ -70,7 +70,7 @@ export function Navbar() {
         }}>
         
         <a
-          href="#"
+          href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -98,11 +98,16 @@ export function Navbar() {
             alignItems: 'center'
           }}>
           
-          {links.map((l) =>
-          <a key={l.label} href={l.href} className="ww-nav-link">
-              {l.label}
-            </a>
-          )}
+          {links.map((l) => (
+  <a
+    key={l.label}
+    href={l.href}
+    className="ww-nav-link"
+    style={{ color: '#a2a1ad' }}  // ✅ ADDED THIS LINE
+  >
+    {l.label}
+  </a>
+))}
           <button
             onClick={() =>
             document.querySelector('#about-us')?.scrollIntoView({

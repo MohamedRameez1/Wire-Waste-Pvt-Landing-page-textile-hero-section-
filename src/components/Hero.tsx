@@ -123,7 +123,7 @@ export function Hero() {
           {/* Request Demo */}
           <button
             onClick={() =>
-              document.querySelector('#contact')?.scrollIntoView({
+              document.querySelector('#about-us')?.scrollIntoView({
                 behavior: 'smooth'
               })
             }

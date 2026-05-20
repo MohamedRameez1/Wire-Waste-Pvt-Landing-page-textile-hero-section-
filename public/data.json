@@ -1,27 +1,36 @@
 {
   "gallery": [
     {
-      "src": "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=400&fit=crop",
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic1.jpg",
       "alt": "Textile recycling facility"
     },
     {
-      "src": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&h=400&fit=crop",
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic2.jpg",
       "alt": "Sustainable fabric production"
     },
     {
-      "src": "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=600&h=400&fit=crop",
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic3.jpg",
       "alt": "Yarn manufacturing process"
     },
     {
-      "src": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic4.jpg",
       "alt": "Quality inspection"
     },
     {
-      "src": "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=600&h=400&fit=crop",
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic5.jpg",
       "alt": "Circular economy in action"
     },
     {
-      "src": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop",
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic6.jpg",
+      "alt": "Supply chain logistics"
+    },
+
+     {
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/test.jpg",
+      "alt": "Supply chain logistics"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic7.jpg",
       "alt": "Supply chain logistics"
     }
   ],

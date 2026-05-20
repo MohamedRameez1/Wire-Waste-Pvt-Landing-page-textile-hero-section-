@@ -24,7 +24,7 @@ export function Blog() {
       id="blog"
       ref={ref}
       style={{
-        padding: '100px 0', // 👈 remove side padding for full-width video
+        padding: '100px 0',
         background: T.white
       }}
     >
@@ -106,17 +106,18 @@ export function Blog() {
         </div>
       </div>
 
-      {/* ✅ FULL-WIDTH VIDEO (NO SIDE SPACE) */}
+      {/* ✅ FULL-WIDTH VIDEO WITH CENTER TEXT */}
       <div
         style={{
           width: '100%',
           marginTop: 80,
           overflow: 'hidden',
-          lineHeight: 0
+          lineHeight: 0,
+          position: 'relative'
         }}
       >
         <video
-          src="/videos/fabric.mp4" // 👈 your file in public/videos
+          src="/videos/fabric.mp4"
           autoPlay
           loop
           muted
@@ -128,6 +129,34 @@ export function Blog() {
             display: 'block'
           }}
         />
+
+        {/* ✅ CENTERED OVERLAY TEXT */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+
+            fontFamily: 'Montserrat, sans-serif',
+            fontWeight: 800,
+
+            fontSize: 'clamp(18px, 7vw, 90px)', // responsive 275pt feel
+            letterSpacing: '0.16em', // ~45 tracking
+
+            color: '#ffffff',
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            whiteSpace: 'nowrap',
+
+            opacity: 0.75,
+            pointerEvents: 'none',
+
+            mixBlendMode: 'overlay'
+          }}
+        >
+          TRACE AND DESIGN
+        </div>
       </div>
 
     </section>
