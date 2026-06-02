@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { T, Icon } from './shared';
 import Silk from "./Silk";
-import ShinyText from './ShinyText';
+import ShinyText from './ShinyText.jsx';
 
 export function Hero() {
   return (
@@ -31,7 +31,7 @@ export function Hero() {
   <Silk
     speed={5}
     scale={1}
-    color="#5227ff"
+    color="#5227ff "
     noiseIntensity={1.5}
     rotation={0}
   />
