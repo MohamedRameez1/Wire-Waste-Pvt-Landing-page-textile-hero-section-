@@ -5,17 +5,41 @@ export function Footer() {
   const cols = [
     {
       title: 'Platform',
-      links: ['Traceability', 'Design Tools', 'Metrics', 'Stakeholders']
+      links: [
+        { label: 'Traceability', id: 'traceability' },
+        { label: 'Design', id: 'design' },
+        { label: 'Metrics', id: 'metrics' },
+        { label: 'Stakeholders', id: 'stakeholders' }
+      ]
     },
     {
       title: 'Company',
-      links: ['About Us', 'Blog', 'Careers', 'Press']
+      links: [
+        { label: 'About Us', id: 'about-us' },
+        { label: 'Contact', id: 'about-us' },
+        { label: 'Request Demo', id: 'about-us' }
+      ]
     },
     {
       title: 'Legal',
-      links: ['Privacy Policy', 'Terms of Use', 'Cookie Policy', 'GDPR']
+      links: [
+        { label: 'Privacy Policy', id: 'privacy-policy' },
+        { label: 'Terms of Use', id: 'terms-of-use' },
+        { label: 'Cookie Policy', id: 'cookie-policy' }
+      ]
     }
   ];
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   return (
     <footer
@@ -41,6 +65,7 @@ export function Footer() {
             marginBottom: 52
           }}
         >
+          {/* Brand Column */}
           <div>
             <img
               src={WW_LOGO}
@@ -84,11 +109,6 @@ export function Footer() {
                   ic: 'linkedin',
                   href: 'https://www.linkedin.com/company/wire-waste/posts/?feedView=all',
                   label: 'Wire Waste LinkedIn'
-                },
-                {
-                  ic: 'twitter',
-                  href: '#',
-                  label: 'Wire Waste Twitter'
                 }
               ].map(({ ic, href, label }) => (
                 <a
@@ -106,18 +126,17 @@ export function Footer() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    cursor: 'pointer',
-                    transition: 'background .2s',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    transition: 'all .25s ease'
                   }}
-                  onMouseEnter={(e) =>
+                  onMouseEnter={(e) => {
                     e.currentTarget.style.background =
-                      'rgba(154,181,42,0.22)'
-                  }
-                  onMouseLeave={(e) =>
+                      'rgba(154,181,42,0.22)';
+                  }}
+                  onMouseLeave={(e) => {
                     e.currentTarget.style.background =
-                      'rgba(255,255,255,0.08)'
-                  }
+                      'rgba(255,255,255,0.08)';
+                  }}
                 >
                   <Icon
                     name={ic}
@@ -130,6 +149,7 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Footer Links */}
           {cols.map((col) => (
             <div key={col.title}>
               <div
@@ -140,7 +160,7 @@ export function Footer() {
                   letterSpacing: '.10em',
                   textTransform: 'uppercase',
                   marginBottom: 18,
-                  fontFamily: "'JetBrains Mono',monospace"
+                  fontFamily: "'JetBrains Mono', monospace"
                 }}
               >
                 {col.title}
@@ -153,26 +173,30 @@ export function Footer() {
                   gap: 11
                 }}
               >
-                {col.links.map((l) => (
+                {col.links.map((link) => (
                   <a
-                    key={l}
-                    href="#"
-                    aria-label={l}
+                    key={link.label}
+                    href={`#${link.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.id);
+                    }}
                     style={{
                       color: 'rgba(255,255,255,0.62)',
                       textDecoration: 'none',
                       fontSize: 14,
-                      transition: 'color .2s'
+                      transition: 'color .2s',
+                      cursor: 'pointer'
                     }}
-                    onMouseEnter={(e) =>
-                      ((e.target as HTMLElement).style.color = '#fff')
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.target as HTMLElement).style.color =
-                        'rgba(255,255,255,0.62)')
-                    }
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#fff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color =
+                        'rgba(255,255,255,0.62)';
+                    }}
                   >
-                    {l}
+                    {link.label}
                   </a>
                 ))}
               </div>
@@ -180,6 +204,7 @@ export function Footer() {
           ))}
         </div>
 
+        {/* Bottom Footer */}
         <div
           style={{
             borderTop: '1px solid rgba(255,255,255,0.10)',
@@ -195,7 +220,7 @@ export function Footer() {
 
           <span
             style={{
-              fontFamily: "'JetBrains Mono',monospace",
+              fontFamily: "'JetBrains Mono', monospace",
               fontSize: 12,
               color: 'rgba(255,255,255,0.38)'
             }}

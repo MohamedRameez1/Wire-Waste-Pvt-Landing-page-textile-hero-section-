@@ -103,7 +103,7 @@ export function Navbar() {
     key={l.label}
     href={l.href}
     className="ww-nav-link"
-    style={{ color: '#a2a1ad' }}  // ✅ ADDED THIS LINE
+    style={{ color: '#c5c5c9' }}  // ✅ ADDED THIS LINE
   >
     {l.label}
   </a>

@@ -41,6 +41,9 @@ const STAKEHOLDERS = [
 
 export function Stakeholders() {
   const [selected, setSelected] = useState<number | null>(null);
+const [hovered, setHovered] = useState<number | null>(null);
+
+const activeIndex = selected !== null ? selected : hovered;
   const ref = useRef(null);
   const inView = useInView(ref, {
     once: true,
@@ -185,49 +188,60 @@ export function Stakeholders() {
               const a = s.angle * Math.PI / 180;
               const x = 210 + R * Math.cos(a),
                 y = 210 + R * Math.sin(a);
-              const active = selected === i;
+              const active = activeIndex === i;
               return (
-                <motion.div
-                  key={i}
-                  initial={{
-                    opacity: 0,
-                    scale: 0
-                  }}
-                  animate={
-                  inView ?
-                  {
-                    opacity: 1,
-                    scale: 1
-                  } :
-                  {}
-                  }
-                  transition={{
-                    delay: 0.5 + i * 0.1,
-                    type: 'spring'
-                  }}
-                  onClick={() => handleNodeInteract(i)}
-                  onTouchStart={() => handleNodeInteract(i)}
-                  style={{
-                    position: 'absolute',
-                    left: x - 37,
-                    top: y - 37,
-                    width: 74,
-                    height: 74,
-                    borderRadius: '50%',
-                    background: active ? T.navy : T.white,
-                    border: `2.5px solid ${active ? T.lime : T.blueGrey}`,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 4,
-                    cursor: 'pointer',
-                    boxShadow: active ?
-                    `0 6px 28px rgba(35,55,109,0.28)` :
-                    '0 2px 12px rgba(0,0,0,0.07)',
-                    transition: 'all .25s',
-                    zIndex: 3
-                  }}>
+               <motion.div
+  key={i}
+  initial={{
+    opacity: 0,
+    scale: 0
+  }}
+  animate={
+    inView
+      ? {
+          opacity: 1,
+          scale: 1
+        }
+      : {}
+  }
+  transition={{
+    delay: 0.5 + i * 0.1,
+    type: 'spring'
+  }}
+  onMouseEnter={() => {
+    if (selected === null) {
+      setHovered(i);
+    }
+  }}
+  onMouseLeave={() => {
+    if (selected === null) {
+      setHovered(null);
+    }
+  }}
+  onClick={() => handleNodeInteract(i)}
+  onTouchStart={() => handleNodeInteract(i)}
+  style={{
+    position: 'absolute',
+    left: x - 37,
+    top: y - 37,
+    width: 74,
+    height: 74,
+    borderRadius: '50%',
+    background: active ? T.navy : T.white,
+    border: `2.5px solid ${active ? T.lime : T.blueGrey}`,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    cursor: 'pointer',
+    boxShadow: active
+      ? `0 6px 28px rgba(35,55,109,0.28)`
+      : '0 2px 12px rgba(0,0,0,0.07)',
+    transition: 'all .25s',
+    zIndex: 3
+  }}
+>
                   
                   <Icon
                     name={s.iconName}
@@ -262,9 +276,9 @@ export function Stakeholders() {
             }}>
             
             <AnimatePresence mode="wait">
-              {selected !== null ?
+              {activeIndex !== null ?
               <motion.div
-                key={selected}
+                key={activeIndex}
                 initial={{
                   opacity: 0,
                   x: 14
@@ -298,7 +312,7 @@ export function Stakeholders() {
                   }}>
                   
                     <Icon
-                    name={STAKEHOLDERS[selected].iconName}
+                    name={STAKEHOLDERS[activeIndex!].iconName}
                     size={26}
                     color={T.lime}
                     strokeWidth={1.6} />
@@ -313,7 +327,7 @@ export function Stakeholders() {
                     fontFamily: "'Fraunces',serif"
                   }}>
                   
-                    {STAKEHOLDERS[selected].label}
+                    {STAKEHOLDERS[activeIndex!].label}
                   </h3>
                   <p
                   style={{
@@ -322,7 +336,7 @@ export function Stakeholders() {
                     lineHeight: 1.78
                   }}>
                   
-                    {STAKEHOLDERS[selected].desc}
+                    {STAKEHOLDERS[activeIndex!].desc}
                   </p>
                 </motion.div> :
 

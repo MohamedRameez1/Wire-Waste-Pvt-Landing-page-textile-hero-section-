@@ -1,41 +1,45 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { T, Icon } from './shared';
-import Silk from "./Silk";
+import { Icon } from './shared';
 import ShinyText from './ShinyText.jsx';
 
 export function Hero() {
   return (
     <section
-  className="ww-hero"
-  style={{
-    minHeight: '100vh', // 👈 revert this
-    height: '100svh',   // 👈 mobile-safe viewport
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden'
-  }}
->
-
-      {/* Silk Background */}
-<div style={{
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  zIndex: 0
-}}>
-  <Silk
-    speed={5}
-    scale={1}
-    color="#5227ff "
-    noiseIntensity={1.5}
-    rotation={0}
-  />
-</div>
+      className="ww-hero"
+      style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '100dvh',
+        height: '100dvh',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 0,
+        padding: 0
+      }}
+    >
+      {/* Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          filter: 'brightness(1.15)',
+          zIndex: 0
+        }}
+      >
+        <source src="/videos/fabric.mp4" type="video/mp4" />
+      </video>
 
       {/* Overlay */}
       <div
@@ -43,48 +47,49 @@ export function Hero() {
           position: 'absolute',
           inset: 0,
           zIndex: 1,
-          pointerEvents: 'none',
           background:
-            'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, rgba(5,10,25,0.4) 100%)'
+            'linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.20))'
         }}
       />
 
       {/* Content */}
       <div
         style={{
-          maxWidth: 900,
+          position: 'relative',
+          zIndex: 2,
+          width: '100%',
+          maxWidth: '900px',
           margin: '0 auto',
-          padding: '120px 5% 80px',
+          padding: '120px 24px 60px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
           textAlign: 'center',
-          position: 'relative',
-          zIndex: 2,
-          width: '100%'
+          boxSizing: 'border-box'
         }}
       >
-
-        {/* 🔥 SHINY HEADING */}
+        {/* Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 22 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.1 }}
+          transition={{ duration: 0.8 }}
           style={{
-            fontFamily: "'Fraunces',serif",
-            fontSize: 'clamp(34px,5vw,62px)',
+            fontFamily: "'Fraunces', serif",
+            fontSize: 'clamp(38px, 7vw, 72px)',
+            lineHeight: 1.08,
             fontWeight: 500,
-            lineHeight: 1.1,
-            marginBottom: 24,
-            letterSpacing: '-0.025em',
-            textShadow: '0 2px 24px rgba(0,0,0,0.3)'
+            letterSpacing: '-0.03em',
+            margin: 0,
+            marginBottom: '24px',
+            textShadow: '0 4px 20px rgba(0,0,0,0.30)'
           }}
         >
           <ShinyText
             text="Reimagining Waste into Measurable Value"
-            speed={4} // smoother premium feel
+            speed={4}
             delay={0.5}
-            color="rgba(255,255,255,0.7)"
+            color="rgba(255,255,255,0.95)"
             shineColor="#ffffff"
             spread={140}
           />
@@ -92,34 +97,34 @@ export function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           style={{
-            fontSize: 17,
-            lineHeight: 1.78,
-            color: 'rgba(255,255,255,0.72)',
-            marginBottom: 40,
-            maxWidth: 480
+            fontSize: 'clamp(16px, 2vw, 20px)',
+            lineHeight: 1.8,
+            color: 'rgba(255,255,255,0.95)',
+            maxWidth: '700px',
+            marginBottom: '40px'
           }}
         >
-          A data-driven platform connecting manufacturers, recyclers, and
-          waste handlers in real time.
+          A data-driven platform connecting manufacturers,
+          recyclers, and waste handlers in real time.
         </motion.p>
 
         {/* Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           style={{
             display: 'flex',
-            gap: 14,
+            gap: '16px',
             flexWrap: 'wrap',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            width: '100%'
           }}
         >
-
           {/* Request Demo */}
           <button
             onClick={() =>
@@ -130,32 +135,27 @@ export function Hero() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 9,
-              background: T.lime,
-              color: '#0f1e42',
+              justifyContent: 'center',
+              gap: '10px',
+              background: '#23376D',
+              color: '#fff',
               border: 'none',
-              borderRadius: 11,
-              padding: '14px 30px',
-              fontSize: 15,
-              fontWeight: 700,
+              borderRadius: '14px',
+              padding: '16px 32px',
+              minWidth: '220px',
+              fontSize: '16px',
+              fontWeight: '700',
               cursor: 'pointer',
-              fontFamily: "'Plus Jakarta Sans',sans-serif",
-              boxShadow: `0 4px 24px rgba(154,181,42,0.38)`,
-              letterSpacing: '.01em',
-              transition: 'all .25s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow =
-                '0 8px 34px rgba(154,181,42,0.52)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'none';
-              e.currentTarget.style.boxShadow =
-                `0 4px 24px rgba(154,181,42,0.38)`;
+              boxShadow: '0 10px 30px rgba(35,55,109,0.35)',
+              transition: 'all 0.3s ease'
             }}
           >
-            <Icon name="demo" size={16} color="#0f1e42" strokeWidth={2.2} />
+            <Icon
+              name="demo"
+              size={18}
+              color="#fff"
+              strokeWidth={2.2}
+            />
             Request Demo
           </button>
 
@@ -169,34 +169,28 @@ export function Hero() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 9,
-              background: 'rgba(255,255,255,0.08)',
+              justifyContent: 'center',
+              gap: '10px',
+              background: 'rgba(255,255,255,0.15)',
               color: '#fff',
-              border: '1.5px solid rgba(255,255,255,0.28)',
-              backdropFilter: 'blur(12px)',
-              borderRadius: 11,
-              padding: '14px 30px',
-              fontSize: 15,
-              fontWeight: 600,
-              cursor: 'pointer',
-              fontFamily: "'Plus Jakarta Sans',sans-serif",
-              transition: 'all .25s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.16)';
-              e.currentTarget.style.borderColor =
-                'rgba(255,255,255,0.50)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-              e.currentTarget.style.borderColor =
-                'rgba(255,255,255,0.28)';
+              border: '1.5px solid rgba(255,255,255,0.35)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '14px',
+              padding: '16px 32px',
+              minWidth: '220px',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer'
             }}
           >
-            <Icon name="arrow" size={15} color="#fff" strokeWidth={2} />
+            <Icon
+              name="arrow"
+              size={16}
+              color="#fff"
+              strokeWidth={2}
+            />
             Learn More
           </button>
-
         </motion.div>
       </div>
     </section>
