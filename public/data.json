@@ -32,32 +32,82 @@
     {
       "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/pic7.jpg",
       "alt": "Supply chain logistics"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/wed1.jpg",
+      "alt": "Supply chain logistics"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/wed2.jpg",
+      "alt": "Supply chain logistics"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/wed3.jpg",
+      "alt": "Supply chain logistics"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MohamedRameez1/My-images/main/wed4.jpg",
+      "alt": "Supply chain logistics"
     }
+
   ],
   "blogs": [
     {
-      "tag": "Industry Insights",
-      "color": "#0F172A",
-      "title": "How Textile Circularity Is Reshaping Fashion Supply Chains",
-      "preview": "Global brands are increasingly turning to circularity models to reduce waste and meet sustainability targets.",
-      "date": "Mar 2025",
-      "iconName": "trend"
-    },
+  "title": "Textile Recycling Expo 2026: Connecting Ideas, People & Possibilities",
+  "preview": "Wire Waste at the Textile Recycling Expo in Brussels, exploring conversations around textile recycling, circularity, and collaboration.",
+  "date": "24–25 June 2026",
+  "tag": "Events",
+  "iconName": "recycle",
+  "color": "#23376D",
+  "slug": "/blog/textile-recycling-expo-brussels-2026"
+},
+{
+  "title": "Bharat Tex 2026: Connecting Textiles, Innovation and Circularity",
+  "preview": "Wire Waste at Bharat Tex 2026, bringing together ideas, connections and opportunities for a more circular textile ecosystem.",
+  "date": "14 July 2026",
+  "tag": "Events",
+  "iconName": "users",
+  "color": "#7FAF8A",
+  "slug": "/blog/bharat-tex-2026"
+},
+     
+      {
+  "title": "Scaling Up Post-Industrial and Pre-Consumer Textile Waste",
+  "preview": "Wire Waste's article in the ICCE Journal explores textile waste circularity through traceability, design, and collaboration.",
+  "date": "07 August 2026",
+  "tag": "Circular Economy",
+  "iconName": "trend",
+  "color": "#8064A2",
+  "slug": "/blog/scaling-up-post-industrial-pre-consumer-textile-waste"
+},
     {
-      "tag": "Case Study",
-      "color": "#F59E0B",
-      "title": "Reducing 12 Tonnes of Waste Monthly With Traceable Loops",
-      "preview": "A leading South Asian manufacturer partnered with Wire Waste to build end-to-end traceability for cotton offcuts.",
-      "date": "Feb 2025",
-      "iconName": "star"
-    },
+  "title": "Global Recycling Day 2026: Recognizing Recycling Heroes",
+  "preview": "Celebrating Global Recycling Day by honoring Krishna Tex, a verified value chain partner contributing to a circular textile ecosystem.",
+  "date": "18 March 2026",
+  "tag": "Recycling",
+  "iconName": "trend",
+  "color": "#16A34A",
+  "slug": "/blog/global-recycling-day-2026"
+},
     {
-      "tag": "Sustainability Trends",
-      "color": "#84CC16",
-      "title": "The Rise of GRS-Certified Recycled Yarn in Premium Apparel",
-      "preview": "Brands now demand third-party verification of recycled content — here's how Wire Waste makes that possible.",
-      "date": "Jan 2025",
-      "iconName": "leaf"
-    }
+      "title": "International Women's Day 2026: Celebrating Women Driving Circular Change",
+      "preview": "Honoring the women whose innovation, leadership, and dedication are shaping a more sustainable textile ecosystem.",
+      "date": "08 March 2026",
+      "tag": "Culture",
+      "iconName": "users",
+  "color": "#EC4899",
+  "slug": "/blog/womens-day-2026"
+
+    },
+  
+    {
+  "title": "World Environment Day 2026: Circular Economy as Climate Action",
+  "preview": "Celebrating circular economy partnerships that transform textile waste into sustainable products.",
+  "date": "05 June 2026",
+  "tag": "Sustainability",
+  "iconName": "leaf",
+  "color": "#16A34A",
+  "slug": "/blog/world-environment-day-2026"
+}
   ]
 }

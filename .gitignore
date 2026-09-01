@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 .vercel
+public/videos/fabric.mp4

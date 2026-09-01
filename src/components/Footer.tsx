@@ -23,9 +23,9 @@ export function Footer() {
     {
       title: 'Legal',
       links: [
-        { label: 'Privacy Policy', id: 'privacy-policy' },
-        { label: 'Terms of Use', id: 'terms-of-use' },
-        { label: 'Cookie Policy', id: 'cookie-policy' }
+        { label: 'Privacy Policy', id: '/privacy-policy' },
+        { label: 'Terms of Use', id: '/terms-of-use' },
+        { label: 'Cookie Policy', id: '/cookie-policy' }
       ]
     }
   ];
@@ -176,8 +176,16 @@ export function Footer() {
                 {col.links.map((link) => (
                   <a
                     key={link.label}
-                    href={`#${link.id}`}
+                    href={
+                      col.title === 'Legal'
+                        ? link.id
+                        : `#${link.id}`
+                    }
                     onClick={(e) => {
+                      if (col.title === 'Legal') {
+                        return;
+                      }
+
                       e.preventDefault();
                       scrollToSection(link.id);
                     }}

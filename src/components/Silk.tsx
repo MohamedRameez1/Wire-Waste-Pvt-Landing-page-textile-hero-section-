@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { forwardRef, useRef, useMemo, useLayoutEffect } from 'react';
-import { Color } from 'three';
+import { useRef, useMemo, useLayoutEffect } from 'react';
+import { Color, Mesh, ShaderMaterial } from 'three';
 
-// ✅ FIXED (removed TS type)
-const hexToNormalizedRGB = (hex) => {
+// ✅ FIXED
+const hexToNormalizedRGB = (hex: string) => {
   hex = hex.replace('#', '');
   return [
     parseInt(hex.slice(0, 2), 16) / 255,
@@ -70,23 +70,29 @@ void main() {
 }
 `;
 
-const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
+interface SilkPlaneProps {
+  uniforms: any;
+  meshRef: React.RefObject<Mesh>;
+}
+
+function SilkPlane({ uniforms, meshRef }: SilkPlaneProps) {
   const { viewport } = useThree();
 
   useLayoutEffect(() => {
-    if (ref.current) {
-      ref.current.scale.set(viewport.width * 1.2, viewport.height * 1.2, 1);
+    if (meshRef.current) {
+      meshRef.current.scale.set(viewport.width * 1.2, viewport.height * 1.2, 1);
     }
-  }, [viewport]);
+  }, [viewport, meshRef]);
 
   useFrame((_, delta) => {
-    if (ref.current) {
-      ref.current.material.uniforms.uTime.value += 0.1 * delta;
+    if (meshRef.current) {
+      const material = meshRef.current.material as ShaderMaterial;
+      material.uniforms.uTime.value += 0.1 * delta;
     }
   });
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={meshRef}>
       <planeGeometry args={[1, 1]} />
       <shaderMaterial
         uniforms={uniforms}
@@ -95,7 +101,7 @@ const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
       />
     </mesh>
   );
-});
+}
 
 const Silk = ({
   speed = 5,
@@ -104,7 +110,7 @@ const Silk = ({
   noiseIntensity = 1.5,
   rotation = 0
 }) => {
-  const meshRef = useRef(null); // ✅ FIXED
+  const meshRef = useRef<Mesh>(null); // ✅ FIXED
 
   const uniforms = useMemo(() => ({
     uSpeed: { value: speed },
@@ -127,7 +133,7 @@ const Silk = ({
         height: '100%'
       }}
     >
-      <SilkPlane ref={meshRef} uniforms={uniforms} />
+      <SilkPlane meshRef={meshRef} uniforms={uniforms} />
     </Canvas>
   );
 };

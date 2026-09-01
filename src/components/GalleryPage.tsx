@@ -54,7 +54,7 @@ export function GalleryPage() {
       {/* Fix navbar overlap */}
       <div style={{ paddingTop: "90px" }}>
         <div className="p-6" style={{ minHeight: "80vh" }}>
-          <h1 className="text-2xl font-bold mb-6">Gallery</h1>
+          {/* <h1 className="text-2xl font-bold mb-6">Gallery</h1> */}
 
           {/* Loading state */}
           {loading ? (

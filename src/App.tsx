@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BlogPage } from "./components/BlogPage";
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutUs } from './components/AboutUs';
@@ -21,7 +21,17 @@ import { useLocation } from "react-router-dom";
 import { MetricsPage } from './components/MetricsPage';
 // ✅ correct import
 import { GalleryPage } from './components/GalleryPage';
-
+import { WomensDayBlogPage } from "./components/WomensDayBlogPage";
+import { GlobalRecyclingDayBlogPage } from "./components/GlobalRecyclingDayBlogPage";
+// @ts-ignore
+import ICCEBlogPage from "./components/ICCEBlogPage";
+// @ts-ignore
+import TextileRecyclingExpoBlogPage from "./components/TextileRecyclingExpoBlogPage";
+// @ts-ignore
+import BharatTex2026BlogPage from "./components/BharatTex2026BlogPage";
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsOfUse } from './components/TermsOfUse';
+import { CookiePolicy } from './components/CookiePolicy';
 function Home() {
   return (
     <>
@@ -69,6 +79,22 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/metrics" element={<MetricsPage />} />
+        <Route path="/blog/world-environment-day-2026" element={<BlogPage />}/>
+        <Route path="/blog/global-recycling-day-2026" element={<GlobalRecyclingDayBlogPage />}/>
+        <Route path="/blog/womens-day-2026" element={<WomensDayBlogPage />}/>
+
+        <Route path="/blog/scaling-up-post-industrial-pre-consumer-textile-waste" element={<ICCEBlogPage />}/>
+        <Route
+  path="/blog/textile-recycling-expo-brussels-2026"
+  element={<TextileRecyclingExpoBlogPage />}
+/>
+<Route
+  path="/blog/bharat-tex-2026"
+  element={<BharatTex2026BlogPage />}
+/>
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms-of-use" element={<TermsOfUse />} />
+<Route path="/cookie-policy" element={<CookiePolicy />} />
       </Routes>
     </BrowserRouter>
   );

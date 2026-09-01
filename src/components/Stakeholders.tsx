@@ -1,58 +1,86 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useRef,
+  useEffect
+} from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { T, Icon, SectionHeader } from './shared';
+
 const STAKEHOLDERS = [
-{
-  label: 'Brand',
-  angle: 270,
-  desc: 'Global brands integrating recycled materials into collections.',
-  iconName: 'brand'
-},
-{
-  label: 'Manufacturer',
-  angle: 330,
-  desc: 'Textile mills and CMT factories logging waste streams.',
-  iconName: 'factory'
-},
-{
-  label: 'Waste Handler',
-  angle: 30,
-  desc: 'On-site collection and initial sorting partners.',
-  iconName: 'recycle'
-},
-{
-  label: 'Waste Merchant',
-  angle: 90,
-  desc: 'Aggregators who consolidate and transport materials.',
-  iconName: 'truck'
-},
-{
-  label: 'Pre-Processor',
-  angle: 150,
-  desc: 'Grading, cleaning, and fibre preparation facilities.',
-  iconName: 'cog'
-},
-{
-  label: 'End-Processor',
-  angle: 210,
-  desc: 'Recyclers converting waste into usable raw materials.',
-  iconName: 'yarn'
-}];
+  {
+    label: 'Brand',
+    angle: 270,
+    desc: 'Global brands integrating recycled materials into collections.',
+    iconName: 'brand'
+  },
+  {
+    label: 'Manufacturer',
+    angle: 330,
+    desc: 'Textile mills and CMT factories logging waste streams.',
+    iconName: 'factory'
+  },
+  {
+    label: 'Waste\nHandler',
+    angle: 30,
+    desc: 'On-site collection and initial sorting partners.',
+    iconName: 'recycle'
+  },
+  {
+    label: 'Waste\nMerchant',
+    angle: 90,
+    desc: 'Aggregators who consolidate and transport materials.',
+    iconName: 'truck'
+  },
+  {
+    label: 'Pre\nProcessor',
+    angle: 150,
+    desc: 'Grading, cleaning, and fibre preparation facilities.',
+    iconName: 'cog'
+  },
+  {
+    label: 'End\nProcessor',
+    angle: 210,
+    desc: 'Recyclers converting waste into usable raw materials.',
+    iconName: 'yarn'
+  }
+];
 
 export function Stakeholders() {
   const [selected, setSelected] = useState<number | null>(null);
-const [hovered, setHovered] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-const activeIndex = selected !== null ? selected : hovered;
   const ref = useRef(null);
+
   const inView = useInView(ref, {
     once: true,
     margin: '-60px'
   });
-  const R = 170;
-  const handleNodeInteract = useCallback((i: number) => {
-    setSelected((prev) => prev === i ? null : i);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
+
+  const activeIndex =
+    selected !== null ? selected : hovered;
+
+  const R = 170;
+
+  const handleNodeInteract = useCallback((i: number) => {
+    setSelected(i);
+  }, []);
+
   return (
     <section
       id="stakeholders"
@@ -60,19 +88,20 @@ const activeIndex = selected !== null ? selected : hovered;
       style={{
         padding: '100px 5%',
         background: T.offWhite
-      }}>
-      
+      }}
+    >
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto'
-        }}>
-        
+        }}
+      >
         <SectionHeader
           badge="Ecosystem"
           title="Our Circular Ecosystem"
-          subtitle="Six stakeholder types working together on one connected platform." />
-        
+          subtitle="Six stakeholder types working together on one connected platform."
+        />
+
         <div
           style={{
             display: 'flex',
@@ -80,8 +109,8 @@ const activeIndex = selected !== null ? selected : hovered;
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: 48
-          }}>
-          
+          }}
+        >
           <motion.div
             className="ww-stakeholder-diagram"
             initial={{
@@ -89,12 +118,12 @@ const activeIndex = selected !== null ? selected : hovered;
               scale: 0.9
             }}
             animate={
-            inView ?
-            {
-              opacity: 1,
-              scale: 1
-            } :
-            {}
+              inView
+                ? {
+                    opacity: 1,
+                    scale: 1
+                  }
+                : {}
             }
             transition={{
               duration: 0.8,
@@ -105,21 +134,23 @@ const activeIndex = selected !== null ? selected : hovered;
               width: 420,
               height: 420,
               flexShrink: 0
-            }}>
-            
+            }}
+          >
             <svg
+              width={420}
+              height={420}
               style={{
                 position: 'absolute',
                 inset: 0
               }}
-              width={420}
-              height={420}>
-              
+            >
               {STAKEHOLDERS.map((s, i) => {
-                const a = s.angle * Math.PI / 180;
-                const x = 210 + R * Math.cos(a),
-                  y = 210 + R * Math.sin(a);
-                const active = selected === i;
+                const a = (s.angle * Math.PI) / 180;
+                const x = 210 + R * Math.cos(a);
+                const y = 210 + R * Math.sin(a);
+
+                const active = activeIndex === i;
+
                 return (
                   <motion.line
                     key={i}
@@ -131,27 +162,27 @@ const activeIndex = selected !== null ? selected : hovered;
                     strokeWidth={active ? 2.5 : 1.5}
                     strokeOpacity={active ? 1 : 0.7}
                     strokeDasharray="5 4"
-                    initial={{
-                      opacity: 0
-                    }}
+                    initial={{ opacity: 0 }}
                     animate={
-                    inView ?
-                    {
-                      opacity: 1
-                    } :
-                    {}
+                      inView
+                        ? {
+                            opacity: 1
+                          }
+                        : {}
                     }
                     transition={{
                       delay: 0.3 + i * 0.08
                     }}
                     style={{
                       transition:
-                      'stroke .3s, stroke-width .3s, stroke-opacity .3s'
-                    }} />);
-
-
+                        'stroke .3s, stroke-width .3s, stroke-opacity .3s'
+                    }}
+                  />
+                );
               })}
             </svg>
+
+            {/* Center Circle */}
             <div
               style={{
                 position: 'absolute',
@@ -169,205 +200,224 @@ const activeIndex = selected !== null ? selected : hovered;
                 padding: 10,
                 zIndex: 2,
                 boxShadow: `0 4px 28px rgba(35,55,109,0.32)`
-              }}>
-              
+              }}
+            >
               <span
                 style={{
                   color: '#fff',
                   fontSize: 9,
                   fontWeight: 700,
-                  fontFamily: "'JetBrains Mono',monospace",
+                  fontFamily: "'JetBrains Mono', monospace",
                   letterSpacing: '.04em',
                   lineHeight: 1.45
-                }}>
-                
+                }}
+              >
                 WIRE WASTE PLATFORM
               </span>
             </div>
+
             {STAKEHOLDERS.map((s, i) => {
-              const a = s.angle * Math.PI / 180;
-              const x = 210 + R * Math.cos(a),
-                y = 210 + R * Math.sin(a);
+              const a = (s.angle * Math.PI) / 180;
+              const x = 210 + R * Math.cos(a);
+              const y = 210 + R * Math.sin(a);
+
               const active = activeIndex === i;
+
               return (
-               <motion.div
-  key={i}
-  initial={{
-    opacity: 0,
-    scale: 0
-  }}
-  animate={
-    inView
-      ? {
-          opacity: 1,
-          scale: 1
-        }
-      : {}
-  }
-  transition={{
-    delay: 0.5 + i * 0.1,
-    type: 'spring'
-  }}
-  onMouseEnter={() => {
-    if (selected === null) {
-      setHovered(i);
-    }
-  }}
-  onMouseLeave={() => {
-    if (selected === null) {
-      setHovered(null);
-    }
-  }}
-  onClick={() => handleNodeInteract(i)}
-  onTouchStart={() => handleNodeInteract(i)}
-  style={{
-    position: 'absolute',
-    left: x - 37,
-    top: y - 37,
-    width: 74,
-    height: 74,
-    borderRadius: '50%',
-    background: active ? T.navy : T.white,
-    border: `2.5px solid ${active ? T.lime : T.blueGrey}`,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 4,
-    cursor: 'pointer',
-    boxShadow: active
-      ? `0 6px 28px rgba(35,55,109,0.28)`
-      : '0 2px 12px rgba(0,0,0,0.07)',
-    transition: 'all .25s',
-    zIndex: 3
-  }}
->
-                  
+                <motion.div
+                  key={i}
+                  initial={{
+                    opacity: 0,
+                    scale: 0
+                  }}
+                  animate={
+                    inView
+                      ? {
+                          opacity: 1,
+                          scale: 1
+                        }
+                      : {}
+                  }
+                  transition={{
+                    delay: 0.5 + i * 0.1,
+                    type: 'spring'
+                  }}
+                  onMouseEnter={() => {
+                    if (!isMobile && selected === null) {
+                      setHovered(i);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (!isMobile && selected === null) {
+                      setHovered(null);
+                    }
+                  }}
+                  onClick={() => {
+                    handleNodeInteract(i);
+                  }}
+                  onTouchStart={(e) => {
+                    e.preventDefault();
+                    handleNodeInteract(i);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    left: x - 37,
+                    top: y - 37,
+                    width: 74,
+                    height: 74,
+                    borderRadius: '50%',
+                    background: active ? T.navy : T.white,
+                    border: `2.5px solid ${
+                      active ? T.lime : T.blueGrey
+                    }`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 4,
+                    cursor: 'pointer',
+                    userSelect: 'none',
+                    WebkitTapHighlightColor: 'transparent',
+                    boxShadow: active
+                      ? `0 6px 28px rgba(35,55,109,0.28)`
+                      : '0 2px 12px rgba(0,0,0,0.07)',
+                    transition: 'all .25s',
+                    zIndex: 3
+                  }}
+                >
                   <Icon
                     name={s.iconName}
                     size={22}
                     color={active ? T.lime : T.accent}
-                    strokeWidth={1.6} />
-                  
-                  <span
-                    style={{
-                      fontSize: 8,
-                      fontWeight: 700,
-                      textAlign: 'center',
-                      color: active ? '#fff' : T.textMuted,
-                      fontFamily: "'JetBrains Mono',monospace",
-                      letterSpacing: '.03em',
-                      textTransform: 'uppercase'
-                    }}>
-                    
-                    {s.label}
-                  </span>
-                </motion.div>);
+                    strokeWidth={1.6}
+                  />
 
+                  <span
+  style={{
+    fontSize: 9,
+    fontWeight: 600,
+    textAlign: 'center',
+    color: active ? '#fff' : T.textMuted,
+    fontFamily: "'Inter', 'Segoe UI', sans-serif",
+    lineHeight: 1.15,
+    whiteSpace: 'pre-line',
+    letterSpacing: '0.01em',
+    padding: '0 4px'
+  }}
+>
+  {s.label}
+</span>
+                </motion.div>
+              );
             })}
           </motion.div>
 
-          {/* Detail panel */}
+          {/* Detail Panel */}
           <div
             style={{
               maxWidth: 340,
               flex: '1 1 280px',
               minHeight: 200
-            }}>
-            
+            }}
+          >
             <AnimatePresence mode="wait">
-              {activeIndex !== null ?
-              <motion.div
-                key={activeIndex}
-                initial={{
-                  opacity: 0,
-                  x: 14
-                }}
-                animate={{
-                  opacity: 1,
-                  x: 0
-                }}
-                exit={{
-                  opacity: 0,
-                  x: -14
-                }}
-                style={{
-                  background: T.white,
-                  border: `1px solid ${T.blueGreyLt}`,
-                  borderRadius: 18,
-                  padding: '32px 28px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.10)'
-                }}>
-                
+              {activeIndex !== null ? (
+                <motion.div
+                  key={activeIndex}
+                  initial={{
+                    opacity: 0,
+                    x: 14
+                  }}
+                  animate={{
+                    opacity: 1,
+                    x: 0
+                  }}
+                  exit={{
+                    opacity: 0,
+                    x: -14
+                  }}
+                  transition={{
+                    duration: 0.3
+                  }}
+                  style={{
+                    background: T.white,
+                    border: `1px solid ${T.blueGreyLt}`,
+                    borderRadius: 18,
+                    padding: '32px 28px',
+                    boxShadow:
+                      '0 8px 32px rgba(0,0,0,0.10)'
+                  }}
+                >
                   <div
-                  style={{
-                    width: 52,
-                    height: 52,
-                    borderRadius: 14,
-                    background: T.navy,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 18
-                  }}>
-                  
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: 14,
+                      background: T.navy,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: 18
+                    }}
+                  >
                     <Icon
-                    name={STAKEHOLDERS[activeIndex!].iconName}
-                    size={26}
-                    color={T.lime}
-                    strokeWidth={1.6} />
-                  
+                      name={
+                        STAKEHOLDERS[activeIndex].iconName
+                      }
+                      size={26}
+                      color={T.lime}
+                      strokeWidth={1.6}
+                    />
                   </div>
-                  <h3
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: T.textPrimary,
-                    marginBottom: 12,
-                    fontFamily: "'Fraunces',serif"
-                  }}>
-                  
-                    {STAKEHOLDERS[activeIndex!].label}
-                  </h3>
-                  <p
-                  style={{
-                    fontSize: 15,
-                    color: T.textSec,
-                    lineHeight: 1.78
-                  }}>
-                  
-                    {STAKEHOLDERS[activeIndex!].desc}
-                  </p>
-                </motion.div> :
 
-              <motion.div
-                key="default"
-                initial={{
-                  opacity: 0
-                }}
-                animate={{
-                  opacity: 1
-                }}
-                style={{
-                  color: T.textMuted,
-                  fontSize: 15,
-                  fontStyle: 'italic',
-                  lineHeight: 1.78,
-                  padding: '32px 28px',
-                  background: T.white,
-                  borderRadius: 18,
-                  border: `1px dashed ${T.blueGreyLt}`,
-                  textAlign: 'center'
-                }}>
-                
-                  Hover or tap any node to learn more about each stakeholder's
-                  role in the circular ecosystem.
+                  <h3
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 600,
+                      color: T.textPrimary,
+                      marginBottom: 12,
+                      fontFamily: "'Fraunces', serif"
+                    }}
+                  >
+                    {STAKEHOLDERS[activeIndex].label}
+                  </h3>
+
+                  <p
+                    style={{
+                      fontSize: 15,
+                      color: T.textSec,
+                      lineHeight: 1.78
+                    }}
+                  >
+                    {STAKEHOLDERS[activeIndex].desc}
+                  </p>
                 </motion.div>
-              }
+              ) : (
+                <motion.div
+                  key="default"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  style={{
+                    color: T.textMuted,
+                    fontSize: 15,
+                    fontStyle: 'italic',
+                    lineHeight: 1.78,
+                    padding: '32px 28px',
+                    background: T.white,
+                    borderRadius: 18,
+                    border: `1px dashed ${T.blueGreyLt}`,
+                    textAlign: 'center'
+                  }}
+                >
+                  Hover or tap any node to learn more about
+                  each stakeholder's role in the circular
+                  ecosystem.
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 }
