@@ -272,20 +272,7 @@ export function IndustryAlignment() {
             textile value chain.
           </p>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              flexShrink: 0,
-              color: "#4A7C6F",
-              fontSize: 12,
-              fontWeight: 600,
-            }}
-          >
-            <ExternalLink size={14} />
-            Industry initiative
-          </div>
+          
         </motion.div>
       </div>
 

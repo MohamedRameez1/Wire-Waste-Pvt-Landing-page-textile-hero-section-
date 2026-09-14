@@ -61,16 +61,42 @@ function ScrollToHash() {
   const { hash, pathname } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace("#", "");
+    if (!hash) return;
 
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    }
+    const id = hash.replace("#", "");
+
+    let attempts = 0;
+    const maxAttempts = 30;
+
+    const scrollToElement = () => {
+      const element = document.getElementById(id);
+
+      if (element) {
+        // Small delay ensures the page layout has finished rendering
+        setTimeout(() => {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+
+        return;
+      }
+
+      // Try again because the Blog component/data may still be loading
+      attempts++;
+
+      if (attempts < maxAttempts) {
+        setTimeout(scrollToElement, 100);
+      }
+    };
+
+    // Start after the route has rendered
+    setTimeout(scrollToElement, 100);
+
+    return () => {
+      attempts = maxAttempts;
+    };
   }, [hash, pathname]);
 
   return null;
