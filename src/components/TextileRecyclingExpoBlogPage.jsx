@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
 import {
   CalendarDays,
   MapPin,
-  ArrowDownRight,
   Recycle,
   Globe2,
   Users,
   Sparkles,
-  MoveRight,
+  ArrowLeft,
 } from "lucide-react";
 
 /* =========================================================
@@ -241,18 +241,6 @@ function TextileRecyclingExpoBlogPage() {
         }
 
         /* ---------------------------------------------
-           ARROW
-        --------------------------------------------- */
-
-        .ww-arrow {
-          transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
-        }
-
-        .ww-card:hover .ww-arrow {
-          transform: translateX(7px);
-        }
-
-        /* ---------------------------------------------
            REDUCED MOTION
         --------------------------------------------- */
 
@@ -272,8 +260,7 @@ function TextileRecyclingExpoBlogPage() {
           }
 
           .ww-image-wrapper img,
-          .ww-card,
-          .ww-arrow {
+          .ww-card {
             transition: none !important;
           }
         }
@@ -282,10 +269,26 @@ function TextileRecyclingExpoBlogPage() {
       <Navbar />
 
       {/* =========================================================
+          BACK LINK
+      ========================================================= */}
+
+      <div className="pt-24 sm:pt-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            to="/#blog"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#23376D] transition-colors hover:text-[#4A7C6F]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Journal
+          </Link>
+        </div>
+      </div>
+
+      {/* =========================================================
           HERO
       ========================================================= */}
 
-      <section className="relative bg-white overflow-hidden pt-24 sm:pt-28">
+      <section className="relative bg-white overflow-hidden pt-6 sm:pt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="relative min-h-[580px] sm:min-h-[620px] rounded-[2rem] overflow-hidden">
@@ -409,20 +412,6 @@ function TextileRecyclingExpoBlogPage() {
                 </Reveal>
 
               </div>
-            </div>
-
-            {/* Explore */}
-
-            <div className="absolute bottom-7 right-7 sm:right-10 hidden sm:flex items-center gap-3 text-white/55">
-
-              <span className="text-[9px] uppercase tracking-[0.18em]">
-                Explore
-              </span>
-
-              <div className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors duration-300">
-                <ArrowDownRight size={16} />
-              </div>
-
             </div>
 
           </div>
@@ -857,7 +846,7 @@ function TextileRecyclingExpoBlogPage() {
                 <div className="ww-image-wrapper rounded-[1.75rem]">
 
                   <img
-                    src="/images/textile-recycling-expo-brussels-4.jpg"
+                    src="/images/textile-recycling-expo-brussels-4.jpeg"
                     alt="Textile recycling expo experience"
                     className="w-full aspect-[4/3] object-cover rounded-[1.75rem]"
                   />
@@ -1009,15 +998,6 @@ function TextileRecyclingExpoBlogPage() {
 
                 </p>
 
-                <div className="mt-5 text-[#4F8A42]">
-
-                  <MoveRight
-                    size={18}
-                    className="ww-arrow"
-                  />
-
-                </div>
-
               </div>
 
             </Reveal>
@@ -1043,15 +1023,6 @@ function TextileRecyclingExpoBlogPage() {
 
                 </p>
 
-                <div className="mt-5 text-[#4F8A42]">
-
-                  <MoveRight
-                    size={18}
-                    className="ww-arrow"
-                  />
-
-                </div>
-
               </div>
 
             </Reveal>
@@ -1076,15 +1047,6 @@ function TextileRecyclingExpoBlogPage() {
                   a more circular textile industry.
 
                 </p>
-
-                <div className="mt-5 text-[#4F8A42]">
-
-                  <MoveRight
-                    size={18}
-                    className="ww-arrow"
-                  />
-
-                </div>
 
               </div>
 

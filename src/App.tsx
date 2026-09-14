@@ -33,6 +33,8 @@ import Intex2026BlogPage from "./components/Intex2026BlogPage";
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { TermsOfUse } from './components/TermsOfUse';
 import { CookiePolicy } from './components/CookiePolicy';
+// @ts-ignore - IndustryAlignment is currently implemented as a JavaScript component.
+import { IndustryAlignment } from "./components/IndustryAlignment";
 function Home() {
   return (
     <>
@@ -44,6 +46,7 @@ function Home() {
       <DesignSection />
       <ChaosToClarity />
       <Metrics />
+      <IndustryAlignment />
       <Stakeholders />
       <KeyFeatures />
       <Gallery />

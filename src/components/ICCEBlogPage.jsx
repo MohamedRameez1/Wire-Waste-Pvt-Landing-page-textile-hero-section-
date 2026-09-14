@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { motion } from "framer-motion";
@@ -14,6 +15,7 @@ import {
   ArrowUpRight,
   ChevronRight,
   FileText,
+  ArrowLeft,
 } from "lucide-react";
 
 /* =========================
@@ -102,10 +104,26 @@ function ICCEBlogPage() {
       <Navbar />
 
       {/* =========================
+          BACK LINK
+      ========================= */}
+
+      <div className="pt-24 sm:pt-28 bg-[#F5F7F2]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            to="/#blog"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#23376D] transition-colors hover:text-[#4A7C6F]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Journal
+          </Link>
+        </div>
+      </div>
+
+      {/* =========================
           HERO SECTION
       ========================= */}
 
-      <section className="relative overflow-hidden bg-[#F5F7F2] pt-28 sm:pt-32 pb-16 sm:pb-24">
+      <section className="relative overflow-hidden bg-[#F5F7F2] pt-8 sm:pt-10 pb-16 sm:pb-24">
 
         {/* Animated Background */}
         <motion.div

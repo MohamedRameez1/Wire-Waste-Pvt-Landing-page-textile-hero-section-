@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { motion } from "framer-motion";
@@ -8,6 +9,7 @@ import {
   MapPin,
   ArrowDown,
   ArrowUpRight,
+  ArrowLeft,
   Globe2,
   Recycle,
   Users,
@@ -15,6 +17,7 @@ import {
   Building2,
   MoveRight,
 } from "lucide-react";
+
 
 /* =========================================================
    ANIMATION VARIANTS
@@ -160,12 +163,25 @@ function BharatTex2026BlogPage() {
                 HERO LEFT CONTENT
             ================================================== */}
 
-            <motion.div
-              className="relative z-10 py-12 lg:py-20"
-              variants={fadeLeft}
-              initial="hidden"
-              animate="visible"
-            >
+           <motion.div 
+  className="relative z-10 py-12 lg:py-20" 
+  variants={fadeLeft} 
+  initial="hidden" 
+  animate="visible" 
+>
+  {/* Back to Journal button */}
+  <Link 
+    to="/#blog" 
+    className="inline-flex items-center gap-2 text-sm font-medium text-[#23376D] transition-colors hover:text-[#4A7C6F] mb-8" 
+  > 
+    <ArrowLeft className="h-4 w-4" /> 
+    Back to Journal 
+  </Link>
+
+  {/* Existing Bharat Tex 2026 section starts here */}
+  <motion.div 
+    className="flex items-center gap-3 mb-7"
+  ></motion.div>
 
               <motion.div
                 className="flex items-center gap-3 mb-7"

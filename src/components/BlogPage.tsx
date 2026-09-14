@@ -1,15 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
-import { Calendar, Leaf, Recycle, TreePine } from "lucide-react";
+import { Calendar, Leaf, Recycle, TreePine, ArrowLeft } from "lucide-react";
 
 export function BlogPage() {
   return (
     <>
       <Navbar />
 
+      {/* Back Link */}
+      <div className="pt-24 sm:pt-28 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <Link
+            to="/#blog"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#23376D] transition-colors hover:text-[#4A7C6F]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Journal
+          </Link>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-green-50 to-white">
+      <section className="pt-8 pb-20 bg-gradient-to-br from-green-50 to-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <span className="inline-block px-4 py-2 rounded-full bg-green-100 text-green-700 font-medium mb-4">
             World Environment Day 2026

@@ -306,20 +306,8 @@ export function Traceability(): React.ReactElement {
                       }}
                     />
 
-                    {/* ARROW */}
-
-                    <div
-                      style={{
-                        fontSize: 16,
-                        color: active ? '#23376D' : '#B8BDC7',
-                        transform: active
-                          ? 'translateX(3px)'
-                          : 'translateX(0)',
-                        transition: 'all 0.3s ease'
-                      }}
-                    >
-                      →
-                    </div>
+      
+                    
                   </div>
 
                   {/* TITLE */}

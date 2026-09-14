@@ -1,15 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
-import { Calendar, Heart } from "lucide-react";
+import { Calendar, Heart, ArrowLeft } from "lucide-react";
 
 export function WomensDayBlogPage() {
   return (
     <>
       <Navbar />
 
+      {/* Back Link */}
+      <div className="pt-24 sm:pt-28 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <Link
+            to="/#blog"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#23376D] transition-colors hover:text-[#4A7C6F]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Journal
+          </Link>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className="pt-28 sm:pt-32 pb-16 sm:pb-20 bg-gradient-to-br from-pink-50 via-white to-purple-50">
+      <section className="pt-6 sm:pt-8 pb-16 sm:pb-20 bg-gradient-to-br from-pink-50 via-white to-purple-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-100 text-pink-700 font-medium mb-6">
             <Heart size={16} />
