@@ -29,6 +29,7 @@ import ICCEBlogPage from "./components/ICCEBlogPage";
 import TextileRecyclingExpoBlogPage from "./components/TextileRecyclingExpoBlogPage";
 // @ts-ignore
 import BharatTex2026BlogPage from "./components/BharatTex2026BlogPage";
+import Intex2026BlogPage from "./components/Intex2026BlogPage";
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { TermsOfUse } from './components/TermsOfUse';
 import { CookiePolicy } from './components/CookiePolicy';
@@ -95,6 +96,10 @@ export function App() {
 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 <Route path="/terms-of-use" element={<TermsOfUse />} />
 <Route path="/cookie-policy" element={<CookiePolicy />} />
+<Route
+  path="/blog/intex-2026"
+  element={<Intex2026BlogPage />}
+/>
       </Routes>
     </BrowserRouter>
   );

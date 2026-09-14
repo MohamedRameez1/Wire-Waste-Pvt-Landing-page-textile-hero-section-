@@ -58,8 +58,17 @@
   "date": "24–25 June 2026",
   "tag": "Events",
   "iconName": "recycle",
-  "color": "#23376D",
+  "color": "#8064A2",
   "slug": "/blog/textile-recycling-expo-brussels-2026"
+},
+{
+  "title": "INtex 2026: Three Days of Conversations, Connections & Possibilities",
+  "preview": "Wire Waste at INtex 2026, connecting with people and ideas shaping a more circular and traceable textile ecosystem.",
+  "date": "18–20 June 2026",
+  "tag": "Events",
+  "iconName": "users",
+  "color": "#23376D",
+  "slug": "/blog/intex-2026"
 },
 {
   "title": "Bharat Tex 2026: Connecting Textiles, Innovation and Circularity",
